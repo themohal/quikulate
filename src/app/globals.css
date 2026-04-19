@@ -1,26 +1,535 @@
 @import "tailwindcss";
 
+/* ─── Quikulate — Warm Paper Studio ─────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Surfaces — warm ivory to cream */
+  --surface-0: #faf8f4;
+  --surface-1: #f4f1eb;
+  --surface-2: #eee9e0;
+  --surface-3: #e6dfd4;
+  --surface-4: #ddd5c7;
+
+  /* Accent — rich copper/terracotta */
+  --accent: #c0652a;
+  --accent-light: #d4783e;
+  --accent-dim: #a85520;
+  --accent-glow: rgba(192, 101, 42, 0.12);
+  --accent-subtle: rgba(192, 101, 42, 0.07);
+
+  /* Text — warm charcoal hierarchy */
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-tertiary: #a8a29e;
+  --text-inverse: #faf8f4;
+
+  /* Borders */
+  --border: rgba(28, 25, 23, 0.08);
+  --border-hover: rgba(28, 25, 23, 0.15);
+  --border-accent: rgba(192, 101, 42, 0.25);
+
+  /* Status */
+  --success: #3d8b3d;
+  --error: #c43c3c;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+
+  /* Fonts */
+  --font-display: var(--font-instrument-serif), "Georgia", serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Menlo", monospace;
+
+  /* Shadows — warm, soft */
+  --shadow-xs: 0 1px 2px rgba(28, 25, 23, 0.04);
+  --shadow-card: 0 1px 3px rgba(28, 25, 23, 0.06), 0 0 0 1px var(--border);
+  --shadow-card-hover: 0 12px 40px rgba(28, 25, 23, 0.1), 0 0 0 1px var(--border-hover);
+  --shadow-elevated: 0 20px 60px rgba(28, 25, 23, 0.12);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--surface-0);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ───────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--text-inverse);
+}
+
+/* ─── Grain Overlay ──────────────────────────────────────── */
+
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+/* ─── Dot Grid Background ────────────────────────────────── */
+
+.dot-grid {
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─── Gradient Meshes ────────────────────────────────────── */
+
+.hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(192, 101, 42, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 85% 30%, rgba(192, 101, 42, 0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 50% at 10% 70%, rgba(160, 120, 70, 0.03) 0%, transparent 50%);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-4);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease both;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* ─── Shared Component Tokens ────────────────────────────── */
+
+.surface-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.surface-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.surface-card-accent:hover {
+  border-color: var(--border-accent);
+}
+
+.surface-inset {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.surface-elevated {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+/* Input styling */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  background: white;
+  border: 1.5px solid var(--surface-3);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input-field:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.input-field::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dim);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: white;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--surface-3);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-1);
+  border-color: var(--surface-4);
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent-glow);
+}
+
+/* ─── Prose/Content Styling ──────────────────────────────── */
+
+.prose-custom {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.prose-custom h2 {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 1.625rem;
+  font-weight: 400;
+  margin-top: 2.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-custom h3 {
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-custom p {
+  margin-bottom: 1.125rem;
+}
+
+.prose-custom strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prose-custom code {
+  background: var(--surface-1);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.prose-custom ul,
+.prose-custom ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.125rem;
+}
+
+.prose-custom li {
+  margin-bottom: 0.4rem;
+}
+
+.prose-custom li::marker {
+  color: var(--accent);
+}
+
+.prose-custom a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent-glow);
+  transition: text-decoration-color 0.2s;
+}
+
+.prose-custom a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* ─── Tool Component Overrides ───────────────────────────── */
+
+.tool-container input[type="text"],
+.tool-container input[type="number"],
+.tool-container input[type="email"],
+.tool-container input[type="datetime-local"],
+.tool-container textarea,
+.tool-container select {
+  background: white !important;
+  border-color: var(--surface-3) !important;
+  color: var(--text-primary) !important;
+  border-radius: var(--radius-md) !important;
+  border-width: 1.5px !important;
+}
+
+.tool-container input:focus,
+.tool-container textarea:focus,
+.tool-container select:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-glow) !important;
+  outline: none !important;
+}
+
+.tool-container input::placeholder,
+.tool-container textarea::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+/* Tool buttons — override orange/gray to match new palette */
+.tool-container button {
+  border-radius: var(--radius-md) !important;
+  transition: all 0.2s ease !important;
+}
+
+/* File inputs */
+.tool-container input[type="file"] {
+  background: var(--surface-1) !important;
+}
+
+.tool-container input[type="file"]::file-selector-button {
+  background: var(--accent) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 8px 16px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
+
+/* Range inputs */
+.tool-container input[type="range"] {
+  accent-color: var(--accent) !important;
+}
+
+/* Checkboxes */
+.tool-container input[type="checkbox"] {
+  accent-color: var(--accent) !important;
+}
+
+/* Override gray-800/900 backgrounds in tools */
+.tool-container .bg-gray-800,
+.tool-container .bg-gray-800\/50 {
+  background: var(--surface-1) !important;
+}
+
+.tool-container .bg-gray-900 {
+  background: white !important;
+}
+
+.tool-container .border-gray-700,
+.tool-container .border-gray-800 {
+  border-color: var(--surface-3) !important;
+}
+
+.tool-container .text-white {
+  color: var(--text-primary) !important;
+}
+
+.tool-container .text-gray-300,
+.tool-container .text-gray-400 {
+  color: var(--text-secondary) !important;
+}
+
+.tool-container .text-gray-500 {
+  color: var(--text-tertiary) !important;
+}
+
+.tool-container .text-orange-400,
+.tool-container .text-orange-500 {
+  color: var(--accent) !important;
+}
+
+.tool-container .bg-orange-500 {
+  background: var(--accent) !important;
+  color: white !important;
+}
+
+.tool-container .bg-orange-500:hover,
+.tool-container .hover\:bg-orange-600:hover {
+  background: var(--accent-dim) !important;
+}
+
+.tool-container .bg-gray-700 {
+  background: var(--surface-2) !important;
+}
+
+.tool-container .hover\:bg-gray-600:hover {
+  background: var(--surface-3) !important;
+}
+
+.tool-container .bg-orange-500\/10 {
+  background: var(--accent-subtle) !important;
+}
+
+.tool-container .focus\:border-orange-500:focus {
+  border-color: var(--accent) !important;
+}
+
+.tool-container .text-green-400 {
+  color: var(--success) !important;
+}
+
+.tool-container .text-red-400 {
+  color: var(--error) !important;
+}
+
+.tool-container .font-mono {
+  font-family: var(--font-mono) !important;
+}
+
+/* Amortization tables and result cards */
+.tool-container .bg-gray-800 th,
+.tool-container .sticky.bg-gray-800 {
+  background: var(--surface-2) !important;
+}
+
+.tool-container .hover\:bg-gray-800\/50:hover {
+  background: var(--surface-1) !important;
+}
+
+.tool-container .border-gray-700\/50 {
+  border-color: var(--border) !important;
+}
+
+.tool-container .accent-orange-500 {
+  accent-color: var(--accent) !important;
 }
