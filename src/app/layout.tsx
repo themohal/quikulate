@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Serif, DM_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import CookieConsent from "@/components/cookie-consent";
 
 const instrumentSerif = Instrument_Serif({
   weight: "400",
@@ -57,6 +58,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
   robots: { index: true, follow: true },
   alternates: { canonical: appUrl },
+  icons: {
+    icon: "/webicon.png",
+    shortcut: "/webicon.png",
+    apple: "/webicon.png",
+  },
 };
 
 const jsonLd = {
@@ -103,6 +109,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         {children}
+        <CookieConsent />
         <div className="noise-overlay" aria-hidden="true" />
       </body>
     </html>

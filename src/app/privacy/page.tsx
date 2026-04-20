@@ -56,31 +56,62 @@ export default function PrivacyPage() {
 
             <h2>3. Cookies and Local Storage</h2>
             <p>
-              Quikulate does not use cookies for tracking. We use browser localStorage to save
-              an anonymous visitor ID for basic analytics. You can clear this at any time by
-              clearing your browser data.
+              Quikulate itself does not use cookies for tracking. However, our advertising
+              partners (Google AdSense) use cookies to serve personalized ads. We use browser
+              localStorage to save your cookie consent preference and an anonymous visitor ID
+              for basic analytics. You can clear this at any time by clearing your browser data.
             </p>
 
-            <h2>4. Google AdSense</h2>
+            <h2>4. Cookie Consent</h2>
             <p>
-              We use Google AdSense to display advertisements. Google AdSense uses cookies to
-              serve ads based on your visits to this and other websites. Google&apos;s use of the DART
-              cookie enables it to serve ads based on your visits to sites across the internet.
+              When you first visit Quikulate, you will see a cookie consent banner at the
+              bottom of the page. You may choose to accept or decline cookies:
+            </p>
+            <ul>
+              <li><strong>Accept</strong> &mdash; Google AdSense may serve personalized ads based on your browsing history and interests.</li>
+              <li><strong>Decline</strong> &mdash; Google AdSense will serve only non-personalized ads. No tracking cookies will be set for ad personalization.</li>
+            </ul>
+            <p>
+              You can change your preference at any time by clearing your browser&apos;s localStorage
+              data for this site, which will cause the consent banner to reappear on your next visit.
+            </p>
+
+            <h2>5. Google AdSense</h2>
+            <p>
+              We use Google AdSense to display advertisements on our website. Google AdSense
+              is a third-party advertising service provided by Google LLC. Google AdSense uses
+              cookies, including the DART cookie, to serve ads based on your visits to this
+              and other websites on the internet.
             </p>
             <p>
-              You may opt out of the DART cookie by visiting the{" "}
+              Google&apos;s use of advertising cookies enables it and its partners to serve ads
+              based on your visit to Quikulate and/or other sites on the internet. Users in
+              the European Economic Area (EEA), UK, and Switzerland will only receive
+              personalized ads if they have given consent through our cookie consent banner.
+            </p>
+            <p>
+              You may opt out of personalized advertising by visiting the{" "}
               <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">
                 Google Ad Settings page
               </a>
-              . You can also opt out of personalized advertising at{" "}
+              . You can also opt out of third-party vendor cookies for personalized
+              advertising at{" "}
               <a href="https://optout.aboutads.info/" target="_blank" rel="noopener noreferrer">
                 aboutads.info
+              </a>{" "}
+              or{" "}
+              <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener noreferrer">
+                networkadvertising.org
               </a>.
             </p>
             <p>
-              For more information, see{" "}
+              For more information about how Google uses data, see{" "}
               <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
                 Google&apos;s Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">
+                How Google uses data when you use our partners&apos; sites
               </a>.
             </p>
 
