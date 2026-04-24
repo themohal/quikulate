@@ -1,9 +1,16 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+
+const BASE_URL = "https://quikulate.vercel.app";
 
 export default function robots(): MetadataRoute.Robots {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://quikulate.vercel.app";
   return {
-    rules: [{ userAgent: "*", allow: "/", disallow: ["/api/"] }],
-    sitemap: `${appUrl}/sitemap.xml`,
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/"],
+      },
+    ],
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

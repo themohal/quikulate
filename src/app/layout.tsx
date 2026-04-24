@@ -56,6 +56,9 @@ export const metadata: Metadata = {
       "28+ free tools: calculators, converters, text utilities, developer tools, and more.",
   },
   metadataBase: new URL(appUrl),
+  verification: {
+    google: "e0p6w0QinOjg0B053DbdTs4Z41KSSuqKU8mKWNfrcn8",
+  },
   robots: { index: true, follow: true },
   alternates: { canonical: appUrl },
   icons: {
