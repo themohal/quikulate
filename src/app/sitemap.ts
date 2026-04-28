@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { tools, categories } from "@/lib/tools-registry";
 import { blogPosts } from "@/lib/blog-posts";
 
-const BASE_URL = "https://quikulate.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://quikulate.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
